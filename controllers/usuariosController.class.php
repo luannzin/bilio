@@ -3,9 +3,6 @@
   require_once "models/dao/UserDAO.php";
   require_once "models/User.class.php";
 
-  // if (!isset($_SESSION))
-  //   session_start();
-
   class UsuariosController
   {
     private $conn;
@@ -23,27 +20,25 @@
       $email = filter_input(INPUT_POST, 'email');
       $senha = md5(filter_input(INPUT_POST, 'senha'));
       if (isset($senha,$email)) {
-
         $userModel = new User(email:$_POST['email'],senha:md5($_POST['senha']));
         $userDao = new UserDAO($this->conn);
         $result = $userDao->verifyExistAccount($userModel);
 
         if(is_array($result) && count($result) > 0)
-            {
-              $userDao->logar($userModel);
-            }
-            else
-            {
-              $msg = "Login ou senha incorretos!";
-            }
+        {
+          $userDao->logar($userModel);
         }
+        else
+        {
+          $msg = "Login ou senha incorretos.";
+        }
+      }
       require_once "views/login.php";
     }
 
     public function deslogar()
     {
       try {
-        //deslogar
         $sessionControll = new SessionControll();
         $sessionControll->destroy();
       } catch (Exception $err) {

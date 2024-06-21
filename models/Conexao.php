@@ -9,7 +9,7 @@
         {
             if (empty(self::$conexao)) {
                 //criar a conexao
-                $parametros = "mysql:host=localhost;dbname=biblioteca;charset=utf8mb4";
+                $parametros = "mysql:host=localhost;dbname=bilio;charset=utf8mb4";
                 try {
                     self::$conexao = new PDO($parametros, "root", "");
                 } catch (PDOException $e) {

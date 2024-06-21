@@ -66,8 +66,8 @@
 
 
         } catch (Exception $e) { {
-            header('location:index.php');
-            return "Problema ao verificar usuário pelo e-mail";
+            // header('location:index.php');
+            return $e;
           }
         }
       }

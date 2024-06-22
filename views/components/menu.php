@@ -19,7 +19,7 @@ if (!isset($_SESSION))
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-orange-50">
+<body class="bg-orange-50 w-screen h-screen overflow-x-hidden">
   <header class="w-full flex justify-center">
     <nav class="flex h-20 w-[1200px] items-center justify-between text-orange-900"> 
         <div class="flex items-center gap-6">
@@ -27,11 +27,11 @@ if (!isset($_SESSION))
           <a href="index.php?controle=livrosController&metodo=listar">Ler agora</a>
           <?= isset($_SESSION['id_usuario']) && isset($_SESSION['adm']) && $_SESSION['adm'] === 'true' ? '
             <div class="relative inline-block">
-              <a>Adicionar</a>
-              <div class="dropdown-content">
-                <a  href="index.php?controle=livrosController&metodo=adicionarLivro">Livro</a>
-                <a  href="index.php?controle=generosController&metodo=adicionarGenero">Gênero</a>
-                <a  href="index.php?controle=autoresController&metodo=adicionarAutor">Autor</a>
+            <a href="index.php?controle=autoresController&metodo=adicionarAutor">Autor</a>
+            <div class="dropdown-content">
+                <a href="index.php?controle=livrosController&metodo=adicionarLivro">Livro</a>
+                <a href="index.php?controle=generosController&metodo=adicionarGenero">Gênero</a>
+                <a href="index.php?controle=autoresController&metodo=adicionarAutor">Autor</a>
               </div>
             </div>
 

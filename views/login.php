@@ -11,7 +11,9 @@ require_once "views/components/menu.php";
         <input class="w-full px-6 py-4 border border-orange-900 rounded-lg bg-orange-50" type="email" placeholder="Email" name="email" required>
         <input class="w-full px-6 py-4 border border-orange-900 rounded-lg bg-orange-50" type="password" placeholder="Senha" name="senha" required>
       </div>
-      <?php if($msg != ''){echo $msg;} ?>
+      <?php if ($msg != '') {
+        echo $msg;
+      } ?>
       <button class="w-full bg-orange-900 text-orange-50 py-4 rounded-lg" type="submit">Entrar</button>
     </form>
 

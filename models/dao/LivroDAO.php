@@ -1,6 +1,6 @@
 <?php
 require_once "models/Conexao.php";
-require_once 'models/SessionControll.php';
+require_once 'models/SessionControl.php';
 
 class LivroDAO
 {
@@ -19,7 +19,6 @@ class LivroDAO
       $stm->execute();
       // $this->conexao = null;
       return $stm->fetchAll(PDO::FETCH_OBJ);
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -33,9 +32,7 @@ class LivroDAO
       $stm = $this->conexao->prepare($sql);
       $stm->bindValue(1, $id);
       $stm->execute();
-      // return $stm->fetchAll(PDO::FETCH_OBJ);
       return $stm->fetch();
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -55,7 +52,8 @@ class LivroDAO
     }
   }
 
-  public function adicionarLivro(Livro $data, $autores, $generos, $img){
+  public function adicionarLivro(Livro $data, $autores, $generos, $img)
+  {
     try {
       $sql = "INSERT INTO livros (titulo, descritivo, imagem) VALUES (?, ?, ?)";
       $stm = $this->conexao->prepare($sql);
@@ -68,22 +66,22 @@ class LivroDAO
       //inserindo no banco N-N autores_livros
       $sql = "INSERT INTO autores_livros (autor_id, livro_id) VALUES ";
 
-       $values = [];
-       foreach ($autores as $autor) {
-         $values[] = '(?,?)';
-       }
+      $values = [];
+      foreach ($autores as $autor) {
+        $values[] = '(?,?)';
+      }
 
-       $sql .= implode(',', $values);
+      $sql .= implode(',', $values);
 
       // // segue o fluxo de execução de query
-       $stm = $this->conexao->prepare($sql);
-       foreach ($autores as $i => $autor) {
-         $stm->bindValue(($i * 2) + 1, $autor);
-         $stm->bindValue((($i * 2) + 2), $livro_id);
-       }
-       $stm->execute();
+      $stm = $this->conexao->prepare($sql);
+      foreach ($autores as $i => $autor) {
+        $stm->bindValue(($i * 2) + 1, $autor);
+        $stm->bindValue((($i * 2) + 2), $livro_id);
+      }
+      $stm->execute();
 
-       //inserindo no banco N-N generos_livros
+      //inserindo no banco N-N generos_livros
       $sql = "INSERT INTO generos_livros (genero_id, livro_id) VALUES ";
 
       $values = [];
@@ -94,21 +92,21 @@ class LivroDAO
       $sql .= implode(',', $values);
 
 
-     // // segue o fluxo de execução de query
+      // // segue o fluxo de execução de query
       $stm = $this->conexao->prepare($sql);
       foreach ($generos as $i => $genero) {
         $stm->bindValue(($i * 2) + 1, $genero);
         $stm->bindValue((($i * 2) + 2), $livro_id);
       }
       $stm->execute();
-
     } catch (PDOException $e) {
       echo $e->getMessage();
     }
   }
 
-  public function excluirLivro($id_genero, $id_autor, $id_livro){
-    try{
+  public function excluirLivro($id_genero, $id_autor, $id_livro)
+  {
+    try {
       $sql = "DELETE generos
               FROM generos_livros generos
                 INNER JOIN livros ON livros.id_livro = generos.livro_id
@@ -130,13 +128,14 @@ class LivroDAO
       $stm->bindValue(1, $id_livro->getIdLivro());
       $stm->execute();
       return "Deletado com sucesso";
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
       echo $e->getMessage();
       // header('location:index.php');
     }
   }
 
-  public function listarLivrosNome(){
+  public function listarLivrosNome()
+  {
     try {
       $sql = "SELECT livros.*, GROUP_CONCAT(DISTINCT autores.nome) autores, GROUP_CONCAT(DISTINCT generos.descritivo) generos
       FROM livros
@@ -154,4 +153,3 @@ class LivroDAO
     }
   }
 }
-?>

@@ -19,42 +19,44 @@ if (!isset($_SESSION))
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-orange-50 w-screen h-screen overflow-x-hidden">
+<body class="bg-orange-50">
   <header class="w-full flex justify-center">
-    <nav class="flex h-20 w-[1200px] items-center justify-between text-orange-900"> 
-        <div class="flex items-center gap-6">
-          <a href="index.php?controle=inicioController&metodo=inicio">Início</a>
-          <a href="index.php?controle=livrosController&metodo=listar">Ler agora</a>
-          <?= isset($_SESSION['id_usuario']) && isset($_SESSION['adm']) && $_SESSION['adm'] === 'true' ? '
-            <div class="relative inline-block">
-            <a href="index.php?controle=autoresController&metodo=adicionarAutor">Autor</a>
-            <div class="dropdown-content">
-                <a href="index.php?controle=livrosController&metodo=adicionarLivro">Livro</a>
-                <a href="index.php?controle=generosController&metodo=adicionarGenero">Gênero</a>
-                <a href="index.php?controle=autoresController&metodo=adicionarAutor">Autor</a>
-              </div>
-            </div>
-
-            <div class="relative inline-block">
-              <a>Tabelas</a>
-              <div class="dropdown-content">
-                <a  href="index.php?controle=livrosController&metodo=listarLivrosAG">Livros</a>
-                <a  href="index.php?controle=generosController&metodo=listarGeneros">Gêneros</a>
-                <a  href="index.php?controle=autoresController&metodo=listarAutores">Autores</a>
-              </div>
-            </div>
+    <nav class="flex min-h-20 h-fit w-[1200px] items-center justify-between text-orange-900">
+      <div class="flex items-center gap-6">
+        <a href="index.php?controle=inicioController&metodo=inicio">Início</a>
+        <?= isset($_SESSION['id_usuario']) ? '
+            <a href="index.php?controle=livrosController&metodo=listar">Ler agora</a>
           ' : null ?>
-        </div>
-        <a href=<?= isset($_SESSION['id_usuario']) ? 'index.php?controle=usuariosController&metodo=deslogar' : 'index.php?controle=usuariosController&metodo=login' ?>>
-          <?= isset($_SESSION['id_usuario']) ? 'Deslogar' : 'Login' ?>
-        </a>
-      </nav>
+        <?= isset($_SESSION['id_usuario']) && isset($_SESSION['adm']) && $_SESSION['adm'] === 'true' ? '
+             <div class="flex flex-col gap-4 relative group">
+              <span>Adicionar</span>
+              <div class="flex flex-col gap-2 absolute py-8 invisible group-hover:visible hover:visible">
+                  <a href="index.php?controle=livrosController&metodo=adicionarLivro">Livro</a>
+                  <a href="index.php?controle=generosController&metodo=adicionarGenero">Gênero</a>
+                  <a href="index.php?controle=autoresController&metodo=adicionarAutor">Autor</a>
+              </div>
+             </div>
+
+             <div class="flex flex-col gap-4 relative group">
+              <span>Tabela</span>
+              <div class="flex flex-col gap-2 absolute py-8 invisible group-hover:visible hover:visible">
+                <a href="index.php?controle=livrosController&metodo=listarLivrosAG">Livros</a>
+                <a href="index.php?controle=generosController&metodo=listarGeneros">Gêneros</a>
+                <a href="index.php?controle=autoresController&metodo=listarAutores">Autores</a>
+              </div>
+             </div>
+          ' : null ?>
+      </div>
+      <a href=<?= isset($_SESSION['id_usuario']) ? 'index.php?controle=usuariosController&metodo=deslogar' : 'index.php?controle=usuariosController&metodo=login' ?>>
+        <?= isset($_SESSION['id_usuario']) ? 'Deslogar' : 'Login' ?>
+      </a>
+    </nav>
   </header>
 </body>
 
 
 <style>
-  .dropdown  {
+  .dropdown {
     text-decoration: none;
     color: white;
     margin: 10px 0;

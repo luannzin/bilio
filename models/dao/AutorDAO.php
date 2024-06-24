@@ -1,6 +1,6 @@
 <?php
 require_once "models/Conexao.php";
-require_once 'models/SessionControll.php';
+require_once 'models/SessionControl.php';
 
 class AutorDAO
 {
@@ -12,7 +12,7 @@ class AutorDAO
   public function selectAutores()
   {
     try {
-      $sql= "SELECT GROUP_CONCAT(DISTINCT autores.nome) nome, autores.id_autor, GROUP_CONCAT(autLivros.livro_id) livro_id
+      $sql = "SELECT GROUP_CONCAT(DISTINCT autores.nome) nome, autores.id_autor, GROUP_CONCAT(autLivros.livro_id) livro_id
               FROM autores
                 LEFT JOIN autores_livros autLivros ON autLivros.autor_id = autores.id_autor
             group by autores.id_autor";
@@ -21,7 +21,6 @@ class AutorDAO
       return $stm->fetchAll(PDO::FETCH_OBJ);
     } catch (Exception $e) {
       echo $e->getMessage();
-
     }
   }
 
@@ -48,7 +47,6 @@ class AutorDAO
       $stm = $this->conexao->prepare($sql);
       $stm->bindValue(1, $data->getNome());
       $stm->execute();
-
     } catch (PDOException $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -63,7 +61,6 @@ class AutorDAO
       $stm->bindValue(1, $id);
       $stm->execute();
       return $stm->fetchAll(PDO::FETCH_OBJ);
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -78,7 +75,6 @@ class AutorDAO
       $stm->execute();
       // $this->conexao = null;
       return $stm->fetchAll(PDO::FETCH_OBJ);
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -95,7 +91,6 @@ class AutorDAO
       $stm->execute();
       // $this->conexao = null;
       return "Alterado com sucesso";
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -109,15 +104,10 @@ class AutorDAO
       $stm = $this->conexao->prepare($sql);
       $stm->bindValue(1, $autor->getIdAutor());
       $stm->execute();
-      // $this->conexao = null;
-
       return "Deletado com sucesso";
-
     } catch (PDOException $e) {
       echo $e->getMessage();
       header('location:index.php');
     }
   }
-
-
 }

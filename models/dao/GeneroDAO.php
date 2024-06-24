@@ -1,6 +1,6 @@
 <?php
 require_once "models/Conexao.php";
-require_once 'models/SessionControll.php';
+require_once 'models/SessionControl.php';
 
 class GeneroDAO
 {
@@ -29,7 +29,7 @@ class GeneroDAO
   public function selectGeneros()
   {
     try {
-      $sql= "SELECT GROUP_CONCAT(DISTINCT generos.descritivo) descritivo, generos.id_genero, GROUP_CONCAT(genLivros.livro_id) livro_id
+      $sql = "SELECT GROUP_CONCAT(DISTINCT generos.descritivo) descritivo, generos.id_genero, GROUP_CONCAT(genLivros.livro_id) livro_id
               FROM generos
                 LEFT JOIN generos_livros genLivros ON genLivros.genero_id = generos.id_genero
               GROUP BY generos.id_genero";
@@ -38,7 +38,6 @@ class GeneroDAO
       return $stm->fetchAll(PDO::FETCH_OBJ);
     } catch (Exception $e) {
       echo $e->getMessage();
-
     }
   }
 
@@ -52,7 +51,6 @@ class GeneroDAO
       $stm->execute();
       // $this->conexao = null;
       return $stm->fetchAll(PDO::FETCH_OBJ);
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -67,7 +65,6 @@ class GeneroDAO
       $stm->execute();
       // $this->conexao = null;
       return $stm->fetchAll(PDO::FETCH_OBJ);
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -84,7 +81,6 @@ class GeneroDAO
       $stm->execute();
       // $this->conexao = null;
       return "Alterado com sucesso";
-
     } catch (Exception $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -101,7 +97,6 @@ class GeneroDAO
       // $this->conexao = null;
 
       return "Deletado com sucesso";
-
     } catch (PDOException $e) {
       echo $e->getMessage();
       header('location:index.php');
@@ -115,11 +110,9 @@ class GeneroDAO
       $stm = $this->conexao->prepare($sql);
       $stm->bindValue(1, $data->getDescritivo());
       $stm->execute();
-
     } catch (PDOException $e) {
       echo $e->getMessage();
       header('location:index.php');
     }
   }
-
 }

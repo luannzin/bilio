@@ -29,7 +29,7 @@ class GenerosController
           header('location:index.php?controle=generosController&metodo=listarGeneros');
         }
       }
-    }else {
+    } else {
       header('Location: index.php');
     }
   }
@@ -40,7 +40,7 @@ class GenerosController
       $generoDAO = new GeneroDAO($this->conn);
       $allGeneros = $generoDAO->getAllGeneros();
       require_once "views/listarGeneros.php";
-    }else {
+    } else {
       header('Location: index.php');
     }
   }
@@ -60,7 +60,7 @@ class GenerosController
           header("location:index.php?controle=generosController&metodo=listarGeneros");
         }
       }
-    }else {
+    } else {
       header('Location: index.php');
     }
   }
@@ -74,8 +74,7 @@ class GenerosController
         $generoDAO->excluirGenero($genero);
         header("location:index.php?controle=generosController&metodo=listarGeneros");
       }
-    }
-    else {
+    } else {
       header('Location: index.php');
     }
   }

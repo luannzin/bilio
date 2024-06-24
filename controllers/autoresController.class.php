@@ -21,7 +21,6 @@ class AutoresController
     } else {
       header('Location: index.php');
     }
-
   }
 
   public function adicionarAutor()
@@ -71,8 +70,7 @@ class AutoresController
         $AutorDAO->excluirAutor($autor);
         header("location:index.php?controle=autoresController&metodo=listarAutores");
       }
-    }
-    else {
+    } else {
       header('Location: index.php');
     }
   }

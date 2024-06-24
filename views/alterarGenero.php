@@ -3,63 +3,13 @@ require_once "views/components/menu.php";
 ?>
 
 
-<div class="container">
-  <h2 class=" mt-16 text-xl font-bold my-3">Alterar genero</h2>
-  <form method="post">
-    <div class="form-group">
-      <input type="hidden" name="id_genero" value="<?php echo $data[0]->id_genero;?>"/>
-      <label for="descritivo">Descritivo:</label>
-      <input id="descritivo" name="descritivo" value="<?php echo $data[0]->descritivo;?>"></input>
-    </div>
-    <input type="submit" value="Alterar">
-  </form>
+<div class="mt-16 w-screen flex justify-center items-center text-orange-900">
+  <div class="w-[600px] flex flex-col items-center justify-center gap-8">
+    <span class="text-2xl"><strong>Alterar Gênero</strong></span>
+    <form method="post" class="w-full flex flex-col gap-4">
+      <input type="hidden" name="id_genero" value="<?php echo $data[0]->id_genero; ?>" />
+      <input class="w-full px-6 py-4 border border-orange-900 rounded-lg bg-orange-50" type="text" placeholder="Nome" name="descritivo" value="<?php echo $data[0]->descritivo; ?>" required />
+      <button class="w-full bg-orange-900 text-orange-50 py-4 rounded-lg" type="submit" value="Adicionar">Alterar</button>
+    </form>
+  </div>
 </div>
-
-<style>
-  .container {
-    width: 400px;
-    margin: 0 auto;
-  }
-
-  select {
-    width: 100%
-  }
-
-  h2 {
-    text-align: center;
-  }
-
-  .form-group {
-    margin-bottom: 10px;
-  }
-
-  label {
-    display: block;
-    font-weight: bold;
-  }
-
-  input[type="text"],
-  textarea {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-  }
-
-  input[type="file"] {
-    width: 100%;
-    padding: 5px;
-  }
-
-  input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-
-  input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-</style>

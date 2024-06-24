@@ -2,7 +2,6 @@
 require_once "views/components/menu.php";
 ?>
 
-
 <div class="mt-16 w-screen flex justify-center items-center text-orange-900">
   <div class="w-[600px] flex flex-col items-center justify-center gap-8">
     <span class="text-2xl"><strong>Entre usando a sua conta Bilio!</strong></span>
@@ -16,7 +15,6 @@ require_once "views/components/menu.php";
       } ?>
       <button class="w-full bg-orange-900 text-orange-50 py-4 rounded-lg" type="submit">Entrar</button>
     </form>
-
     <a href="index.php?controle=usuariosController&metodo=criarConta">Não tem uma conta? <span>Crie uma agora</span></a>
   </div>
 </div>

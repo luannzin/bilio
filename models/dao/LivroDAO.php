@@ -152,4 +152,35 @@ class LivroDAO
       header('location:index.php');
     }
   }
+
+  public function listarLivrosReservados()
+  {
+    try {
+      $sql = "SELECT livros.*, GROUP_CONCAT(DISTINCT usuarios.nome) usuarios
+      FROM livros
+        INNER JOIN livros_reservados ON livros_reservados.id_livro = livros.id_livro
+          INNER JOIN usuarios ON usuarios.id_usuario = livros_reservados.id_usuario
+      GROUP BY livros.id_livro ORDER BY livros.titulo";
+      $stm = $this->conexao->prepare($sql);
+      $stm->execute();
+      return $stm->fetchAll(PDO::FETCH_OBJ);
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      header('location:index.php');
+    }
+  }
+
+  public function reservarLivro($id_usuario, $id_livro)
+  {
+    try {
+      $sql = "INSERT INTO livros_reservados (id_usuario, id_livro) VALUES (?, ?)";
+      $stm = $this->conexao->prepare($sql);
+      $stm->bindValue(1, $id_usuario);
+      $stm->bindValue(2, $id_livro);
+      $stm->execute();
+      return $stm->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $e) {
+      echo $e->getMessage();
+    }
+  }
 }

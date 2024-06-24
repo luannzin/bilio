@@ -25,7 +25,7 @@ if (!isset($_SESSION))
       <div class="flex items-center gap-6">
         <a href="index.php?controle=inicioController&metodo=inicio">Início</a>
         <?= isset($_SESSION['id_usuario']) ? '
-            <a href="index.php?controle=livrosController&metodo=listar">Ler agora</a>
+            <a href="index.php?controle=livrosController&metodo=listar">Coleção</a>
           ' : null ?>
         <?= isset($_SESSION['id_usuario']) && isset($_SESSION['adm']) && $_SESSION['adm'] === 'true' ? '
              <div class="flex flex-col gap-4 relative group">
@@ -45,6 +45,8 @@ if (!isset($_SESSION))
                 <a href="index.php?controle=autoresController&metodo=listarAutores">Autores</a>
               </div>
              </div>
+
+             <a href="index.php?controle=livrosController&metodo=listarLivrosReservados">Reservados</a>
           ' : null ?>
       </div>
       <a href=<?= isset($_SESSION['id_usuario']) ? 'index.php?controle=usuariosController&metodo=deslogar' : 'index.php?controle=usuariosController&metodo=login' ?>>

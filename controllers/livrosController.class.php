@@ -41,6 +41,25 @@ class livrosController
     }
   }
 
+  public function listarLivrosReservados()
+  {
+    if ($_SESSION['adm'] === 'true') {
+      $livroDAO = new LivroDAO($this->conn);
+      $todosLivros = $livroDAO->listarLivrosReservados();
+
+      require_once "views/listarLivrosReservados.php";
+    } else {
+      header('Location: index.php');
+    }
+  }
+
+  public function reservarLivro()
+  {
+    $livroDAO = new LivroDAO($this->conn);
+    $livroDAO->reservarLivro($_SESSION["id_usuario"], $_GET["id"]);
+    require_once "views/reservarConfirmacao.php";
+  }
+
   public function adicionarLivro()
   {
     if ($_SESSION['adm'] === 'true') {
@@ -175,6 +194,7 @@ class livrosController
   {
     $livroDAO = new LivroDAO($this->conn);
     $data = $livroDAO->getLivroPerId($_GET['id']);
+    $data['id'] = $_GET['id'];
     require_once "views/livroPorId.php";
   }
 }

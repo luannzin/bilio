@@ -45,8 +45,9 @@ if (!isset($_SESSION))
                 <a href="index.php?controle=autoresController&metodo=listarAutores">Autores</a>
               </div>
              </div>
-
-             <a href="index.php?controle=livrosController&metodo=listarLivrosReservados">Reservados</a>
+          ' : null ?>
+        <?= isset($_SESSION['id_usuario']) ? '
+            <a href="index.php?controle=livrosController&metodo=listarLivrosReservados">Reservados</a>
           ' : null ?>
       </div>
       <a href=<?= isset($_SESSION['id_usuario']) ? 'index.php?controle=usuariosController&metodo=deslogar' : 'index.php?controle=usuariosController&metodo=login' ?>>

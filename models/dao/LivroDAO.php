@@ -170,6 +170,25 @@ class LivroDAO
     }
   }
 
+  public function listarLivrosReservadosPorUsuario()
+  {
+    try {
+      $sql = "SELECT livros.*, GROUP_CONCAT(DISTINCT usuarios.nome) usuarios
+      FROM livros
+        INNER JOIN livros_reservados ON livros_reservados.id_livro = livros.id_livro
+          INNER JOIN usuarios ON usuarios.id_usuario = livros_reservados.id_usuario
+      WHERE usuarios.id_usuario = :usuario_id
+      GROUP BY livros.id_livro ORDER BY livros.titulo";
+      $stm = $this->conexao->prepare($sql);
+      $stm->bindParam(':usuario_id', $_SESSION["id_usuario"], PDO::PARAM_INT);
+      $stm->execute();
+      return $stm->fetchAll(PDO::FETCH_OBJ);
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      header('location:index.php');
+    }
+  }
+
   public function reservarLivro($id_usuario, $id_livro)
   {
     try {

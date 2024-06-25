@@ -48,6 +48,11 @@ class livrosController
       $todosLivros = $livroDAO->listarLivrosReservados();
 
       require_once "views/listarLivrosReservados.php";
+    } else if ($_SESSION['id_usuario']) {
+      $livroDAO = new LivroDAO($this->conn);
+      $todosLivros = $livroDAO->listarLivrosReservadosPorUsuario();
+
+      require_once "views/listarLivrosReservados.php";
     } else {
       header('Location: index.php');
     }
